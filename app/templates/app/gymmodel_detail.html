@@ -1,0 +1,16 @@
+{% extends "app/base.html" %}
+
+{% load static %}
+
+{% block principal %}
+
+<h1>Detalle del ejercicio</h1>
+<div>
+    <ul> 
+        <li> {{ object.id}}</li>
+        <li> {{ object.tituloejercicio }} </li> 
+        <li> {{ object.descripcion}} </li>
+    </ul>
+</div>
+
+{% endblock %}

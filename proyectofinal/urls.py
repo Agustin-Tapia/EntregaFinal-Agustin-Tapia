@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app.views import (pagina, instagram, email, formulario, 
-PostList, PostDetail, CrearEjercicio, PostUpdate, PostDelete, BuscarEjercicio, Login, SignUp, Logout
+PostList, PostDetail, CrearEjercicio, PostUpdate, PostDelete, BuscarEjercicio, 
+Login, SignUp, Logout, ProfileCreate, ProfileUpdate, PostMineList
 )
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,5 +33,8 @@ urlpatterns = [
     path('post/search', BuscarEjercicio.as_view(), name= "post-search"),
     path('login', Login.as_view(), name= "login"),
     path('signup', SignUp.as_view(), name= "signup"),
-    path('logout', Logout.as_view(), name= "logout")
+    path('logout', Logout.as_view(), name= "logout"),
+    path('post/list/mine', PostMineList.as_view(), name= "post-mine"), #mis posts
+    path('profile', ProfileCreate.as_view(), name= "profile-create"),
+    path('profile/<pk>/update', ProfileUpdate.as_view(), name= "profile-update")
 ]

@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from app.models import GymModel
+from app.models import GymModel, Profile
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 #-----renderizar HTML-----#
 def pagina(request):
@@ -31,17 +31,30 @@ class PostList(ListView):
     model = GymModel
     context_object_name = "gyms"    
 
+class PostMineList(LoginRequiredMixin, PostList):
+    def get_queryset(self):
+        return GymModel.objects.filter(publisher = self.request.user.id).all()
+
+
 class PostDetail(DetailView):
     model = GymModel
     context_object_name = "detail"
 
-class PostUpdate(LoginRequiredMixin,UpdateView):
+
+#-----PermisosTest-----#
+class PermisosSolo(UserPassesTestMixin):
+     def test_func(self):
+        user_id = self.request.user.id
+        post_id = self.kwargs.get("pk")
+        return GymModel.objects.filter(publisher = user_id, id = post_id). exists()
+
+class PostUpdate(LoginRequiredMixin, PermisosSolo, UpdateView):
     model = GymModel
     context_object_name = "update"
     success_url = reverse_lazy("post-list")
     fields = '__all__'
 
-class PostDelete(LoginRequiredMixin,DeleteView):
+class PostDelete(LoginRequiredMixin, PermisosSolo, DeleteView):
     model = GymModel
     context_object_name = "delete"
     success_url = reverse_lazy("post-list")
@@ -59,6 +72,7 @@ class BuscarEjercicio(LoginRequiredMixin,ListView):
         result = (GymModel.objects.filter(tituloejercicio__icontains=criterio).all())
         return result
 
+#------ Seccion Usuario -----#
 class Login(LoginView):
     next_page = reverse_lazy("post-list")
 
@@ -70,3 +84,20 @@ class SignUp(CreateView):
 class Logout(LogoutView):
     template_name = "registration/logout.html"
 
+#------ Creacion Profile ------#
+
+class ProfileCreate(LoginRequiredMixin,CreateView):
+    model = Profile
+    success_url = reverse_lazy("post-list")
+    fields = ['avatar',]
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class ProfileUpdate(UpdateView):
+    model = Profile
+    success_url = reverse_lazy("post-list")
+    fields = ['avatar']
+    def test_func(self):
+        return Profile.objects.filter(user = self.request.user).exists("profile")

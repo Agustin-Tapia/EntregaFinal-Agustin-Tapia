@@ -88,17 +88,17 @@ Correr en la terminal: **git push origin main**
 
 # Mi Proyecto de Calistenia: LAS FUNCIONES
 ###### Inicio con cuenta registrada:
-- Tenemos al rededor de 10 funciones diferentes entre las cuales se encuentra:
+- Tenemos 13 funciones diferentes entre las cuales se encuentra:
 1. "**About"**: Se encuentra información sobre mi y el origen de la página web.
-1. "**Home"**: Podemos observar un texto diciendonos que nos registremos en las secciones de arriba al lado de "Home".
-1. "**SignUp"**: Template donde podras registrate y tener acceso a mas en la pagina del admin.
-1. "**Login"**: Template donde podras ingresar con tu cuenta creada previamente.
-1. "**Ejercicios"**: Template donde se encuentran todos los ejercicios de calistenia/gym con botones de *detalle*, *actualizar* y *borrar*.  *Solo si sos dueño podes actualizar o borrar*.
-1. "**Enviar Mensaje"**: Un template con formulario de envio de mensajes a diferentes usarios registrados.
-1. "**Mis ejercicios"**: Template con los ejercicios ingresados (si no hay ninguno ingresado, se presentera un texto "sin ejercicios") por el usuario dueño. con botones de *detalle*, *actualizar* y *borrar*. 
-1. "**Agregar ejercicio"**: Template usado para agregar cualquier tipo de ejercicio de calistenia u otro deporte si es que prefiere. Con *titulo, tipo, descripcion , creador e imagen. * Descargar la foto de google.
-1. "**Ejercicios"**: Template donde almacenan los ejercicios recibidos donde no podras editarlos, pero si ver el detalles de ellos.
-1. "**Tus mensajes"**: Template con los mensajes ingresados (si no hay ninguno ingresado, se presentera un texto "No hay mensajes agregados.") por el admin. con botones de *detalle*, *actualizar* y *borrar*. 
-1. "**Crear Perfil"**: Template para poder crear tu propio avatar con imagen.
-1. "**Buscar Post"**: Template donde podras buscar y filtrar los ejercicios registrados en la pagina.
-1. "**tu usuario | Logout"**: Boton usado para salir de la cuenta del usuario. 
+2. "**Home"**: Podemos observar un texto diciendonos que nos registremos en las secciones de arriba al lado de "Home".
+3. "**SignUp"**: Template donde podras registrate y tener acceso a mas en la pagina del admin.
+4. "**Login"**: Template donde podras ingresar con tu cuenta creada previamente.
+5. "**Ejercicios"**: Template donde se encuentran todos los ejercicios de calistenia/gym con botones de *detalle*, *actualizar* y *borrar*.  *Solo si sos dueño podes actualizar o borrar*.
+6. "**Enviar Mensaje"**: Un template con formulario de envio de mensajes a diferentes usarios registrados.
+7. "**Mis ejercicios"**: Template con los ejercicios ingresados (si no hay ninguno ingresado, se presentera un texto "sin ejercicios") por el usuario dueño. con botones de *detalle*, *actualizar* y *borrar*. 
+8. "**Agregar ejercicio"**: Template usado para agregar cualquier tipo de ejercicio de calistenia u otro deporte si es que prefiere. Con *titulo, tipo, descripcion , creador e imagen. * Descargar la foto de google.
+9. "**Ejercicios"**: Template donde almacenan los ejercicios recibidos donde no podras editarlos, pero si ver el detalles de ellos.
+10. "**Tus mensajes"**: Template con los mensajes ingresados (si no hay ninguno ingresado, se presentera un texto "No hay mensajes agregados.") por el admin. con botones de *detalle*, *actualizar* y *borrar*. 
+11. "**Crear Perfil"**: Template para poder crear tu propio avatar con imagen.
+12. "**Buscar Post"**: Template donde podras buscar y filtrar los ejercicios registrados en la pagina.
+13. "**tu usuario | Logout"**: Boton usado para salir de la cuenta del usuario. 

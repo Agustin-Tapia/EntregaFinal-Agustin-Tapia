@@ -160,10 +160,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
-          <h4>About</h4>
-          <p class="text-body-secondary">Mi nombre es Agustin Tapia, mi proyecto se trata de diferentes tipos de ejercicios del deporte Calistenia, donde hare una breve descripción en c/u de ellos.
-            Aqui abajo se podrán registrar.
-          </p>
+          <li><a href="{% url 'sobre-mi' %}" class="text-white">ABOUT</a></li>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <h4>Contact</h4>
@@ -182,51 +179,76 @@
         <strong>Home</strong>
       </a>
       {% if user.is_authenticated %}
+
           <a href="{% url 'post-mine' %}" class="navbar-brand d-flex align-items-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"><circle cx="12" cy="13" r="4"/></svg>
         <strong>Mis Ejercicios</strong>
           </a>
+
           <a href="{% url 'post-create' %}" class="navbar-brand d-flex align-items-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"><circle cx="12" cy="13" r="4"/></svg>
         <strong>Agregar Ejercicio</strong>
           </a>
+
+          <a href="{% url 'crear-mensaje' %}" class="navbar-brand d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"><circle cx="12" cy="13" r="4"/></svg>
+            <strong>Enviar Mensaje</strong>
+              </a>
+          
+          <a href="{% url 'mensaje-list' %}" class="navbar-brand d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"><circle cx="12" cy="13" r="4"/></svg>
+            <strong>Tus Mensajes</strong>
+              </a>
+
         {% if user.profile %}
+
             <a href="{% url 'profile-update' user.profile.id %}" class="navbar-brand d-flex align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"><circle cx="12" cy="13" r="4"/></svg>
             <strong>Actualizar Profile</strong>
             </a>
+
         {% else %}
+
             <a href="{% url 'profile-create' %}" class="navbar-brand d-flex align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"><circle cx="12" cy="13" r="4"/></svg>
             <strong>Crear Profile</strong>
             </a>
+
         {% endif %}
+
         <a href="{% url 'logout' %}" class="navbar-brand d-flex align-items-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"></svg>
         <strong>{{user.username}} | Logout</strong>
         </a>
         
       {% else %} 
+
           <a href="{% url 'signup' %}" class="navbar-brand d-flex align-items-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"><circle cx="12" cy="13" r="4"/></svg>
           <strong>SignUp</strong>
           </a>
+
           <a href="{% url 'login' %}" class="navbar-brand d-flex align-items-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"><circle cx="12" cy="13" r="4"/></svg>
           <strong>Login</strong>
           </a>
+
       {% endif %}
+
       <a href="{% url 'post-list' %}" class="navbar-brand d-flex align-items-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"><circle cx="12" cy="13" r="4"/></svg>
         <strong>Ejercicios</strong>
           </a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <form action="{% url 'post-search' %}" class="d-flex">
         <input class="form-control me-2" name="criterio" type="search" placeholder="Buscar un post" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Buscar</button>
       </form>
+
     </div>
   </div>
 </header>
@@ -234,16 +256,26 @@
 
 
 <main>
-
+  {% if user.is_authenticated %}
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Proyecto Final</h1>
-        <p class="lead text-body-secondary">Este proyecto tratará mostrando y explicando al usuario mis diferentes ejercicios de Calistenia.</p>
-        <p style="color: brown;" lead ="text-center" >Por favor, registrate e ingresa a mi pagina para poder tener acceso a más!</p>
+        <h1 class="fw-light">Bienvenido</h1>
+        <img src="https://static8.depositphotos.com/1011643/1067/i/600/depositphotos_10678547-stock-photo-gym-trainer-welcome-customer.jpg">
       </div>
     </div>
   </section>
+    {% else %}
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">Proyecto Final</h1>
+          <p class="lead text-body-secondary">Este proyecto tratará mostrando y explicando al usuario mis diferentes ejercicios de Calistenia.</p>
+          <p style="color: brown;" lead ="text-center" >Por favor, registrate e ingresa a mi pagina para poder tener acceso a más!</p>
+        </div>
+      </div>
+    </section>
+  {% endif %}
 
 </main>
 {% endblock %}

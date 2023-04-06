@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from app.models import GymModel, Profile
+from app.models import GymModel, Profile, Mensaje
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
@@ -13,6 +13,8 @@ def instagram(request):
     return render(request, "app/instagram.html")
 def email(request):
     return render(request, "app/email.html")
+def about(request):
+    return render(request, "app/about.html")
 
 #>>>>>Formulario>>>>>>#
 
@@ -25,11 +27,11 @@ def formulario(request):
 
 
 
-#------- CLASES ------#
+#------- CLASES pages ------#
 
 class PostList(ListView):
     model = GymModel
-    context_object_name = "gyms"    
+    template_name="app/gymmmodel_list.html"    
 
 class PostMineList(LoginRequiredMixin, PostList):
     def get_queryset(self):
@@ -39,9 +41,10 @@ class PostMineList(LoginRequiredMixin, PostList):
 class PostDetail(DetailView):
     model = GymModel
     context_object_name = "detail"
+    template_name = "app/gymmodel_detail.html"
 
 
-#-----PermisosTest-----#
+#-----Permisos Test-----#
 class PermisosSolo(UserPassesTestMixin):
      def test_func(self):
         user_id = self.request.user.id
@@ -101,3 +104,31 @@ class ProfileUpdate(UpdateView):
     fields = ['avatar']
     def test_func(self):
         return Profile.objects.filter(user = self.request.user).exists("profile")
+
+
+
+#------Mensajes-----#
+
+class MensajeCreate(CreateView):
+    model = Mensaje
+    success_url = reverse_lazy('crear-mensaje')
+    fields = '__all__'
+
+
+class MensajeDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Mensaje
+    context_object_name = "mensaje"
+    success_url = reverse_lazy("mensaje-list")
+
+    def test_func(self):
+        return Mensaje.objects.filter(destinatario=self.request.user).exists()
+    
+
+class MensajeList(LoginRequiredMixin, ListView):
+    model = Mensaje
+    context_object_name = "mensajes"
+
+    def get_queryset(self):
+        import pdb; pdb.set_trace
+        return Mensaje.objects.filter(destinatario=self.request.user).all()
+    

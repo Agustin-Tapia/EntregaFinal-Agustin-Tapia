@@ -15,13 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app.views import (pagina, instagram, email, formulario, 
+from app.views import (pagina, instagram, email, formulario, about, 
 PostList, PostDetail, CrearEjercicio, PostUpdate, PostDelete, BuscarEjercicio, 
-Login, SignUp, Logout, ProfileCreate, ProfileUpdate, PostMineList
+Login, SignUp, Logout, MensajeCreate ,ProfileCreate, ProfileUpdate, PostMineList, MensajeList, MensajeDelete
 )
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', pagina, name="pagina"),
+    path('sobre/mi', about, name="sobre-mi"),
     path('instagram', instagram, name="instagram"),
     path('email',email, name="email"),
     path('ejercicio', formulario, name="ejercicios"),
@@ -35,6 +39,11 @@ urlpatterns = [
     path('signup', SignUp.as_view(), name= "signup"),
     path('logout', Logout.as_view(), name= "logout"),
     path('post/list/mine', PostMineList.as_view(), name= "post-mine"), #mis posts
+    path('mensajes/create', MensajeCreate.as_view(), name= "crear-mensaje"),
+    path('mensaje/list', MensajeList.as_view(), name="mensaje-list" ),
+    path('mensaje/<pk>/delete', MensajeDelete.as_view(), name="mensaje-delete"),
     path('profile', ProfileCreate.as_view(), name= "profile-create"),
-    path('profile/<pk>/update', ProfileUpdate.as_view(), name= "profile-update")
+    path('profile/<pk>/update', ProfileUpdate.as_view(), name= "profile-update"),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

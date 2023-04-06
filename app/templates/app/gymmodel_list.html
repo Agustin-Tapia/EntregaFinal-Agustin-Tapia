@@ -3,7 +3,13 @@
 
 {% block principal %} 
     <ul>
-        {%  for post in gyms %}
+        {% if not objects %}
+
+        <h1> No hay ejercicios agregados.</h1>
+
+        {% endif %}
+
+        {%  for post in objects %}
         <li style="margin-top: 5px;"> 
             {{post.id}} - {{post.tituloejercicio}} 
             <a href="{% url 'post-detail' post.id %}" class="btn btn-primary btn-sm">Detalle del ejercicio</a>

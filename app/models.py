@@ -5,8 +5,15 @@ class GymModel(models.Model):
     tituloejercicio = models.CharField(max_length=30)
     descripcion = models.TextField()
     publisher = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name=  "publisher")
+    image = models.ImageField(upload_to="posts", null= True, blank= True)
+    creado_el = models.DateTimeField(auto_now_add=True) 
+
+    @property
+    def image_url(self):
+        return self.image.url if self.image else ''
+    
     def __str__(self):
-        return f"{self.tituloejercicio} - {self.descripcion}"
+        return f"{self.tituloejercicio} - {self.descripcion} - {self.creado_el}"
     
 class Profile(models.Model):
     user = models.OneToOneField(to = User, on_delete=models.CASCADE, related_name= "profile")
@@ -15,3 +22,9 @@ class Profile(models.Model):
     def avatar_url(self):
         return self.avatar.url if self.avatar else ''
     
+
+class Mensaje(models.Model):
+    mensaje = models.TextField(max_length=1000)
+    email = models.EmailField()
+    creado_el = models.DateTimeField(auto_now_add=True) 
+    destinatario = models.ForeignKey(User, on_delete=models.CASCADE, related_name="mensajes")

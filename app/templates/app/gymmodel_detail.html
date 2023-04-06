@@ -4,13 +4,12 @@
 
 {% block principal %}
 
-<h1>Detalle del ejercicio</h1>
-<div>
-    <ul> 
-        <li> {{ object.id}}</li>
-        <li> {{ object.tituloejercicio }} </li> 
-        <li> {{ object.descripcion}} </li>
-    </ul>
-</div>
+<div class="d-flex justify-content-center">
+    <div class="col col-8" style="text-align: center;">
+        <h1 class="mt-5">{{ object.tituloejercicio }}</h1>
+        <p><img height="256px" src="{{object.image_url}}"></p>
+        <p class="lead">{{ object.descripcion}}</p>
+    </div>
+  </div>
 
 {% endblock %}

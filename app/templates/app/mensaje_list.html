@@ -1,0 +1,23 @@
+{% extends "app/base.html" %}
+
+{% load static %}
+
+ {% block principal %}
+     {% if not mensaje %}
+
+    <h1> No hay mensajes agregados.</h1>
+
+    {% endif %}
+
+<ul>
+    {%  for mensaje in mensajes  %}
+    <li> Mensaje de: {{mensaje.email}} 
+        <br> 
+        {{ mensaje.mensaje }}
+        <br>
+        <button type="button" class="btn btn-danger" href="{% url 'mensaje-delete' mensaje.id %}">Borrar</button>
+    </li>
+    {% endfor %}
+
+</ul>
+{% endblock %}
